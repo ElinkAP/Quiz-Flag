@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/quizLinearLayout"
     android:layout_width="match_parent"
@@ -39,110 +38,112 @@
         android:text="@string/guess_country"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-    <LinearLayout
-        android:id="@+id/row1LinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
 
-        <Button
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/row1LinearLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:lines="2"
-            android:text="Button"
-            android:textColor="@color/button_text_color" />
+            android:orientation="horizontal">
 
-        <Button
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="0dp"
+            <Button
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:lines="2"
+                android:text="Button"
+                android:textColor="@color/button_text_color" />
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:lines="2"
+                android:text="Button"
+                android:textColor="@color/button_text_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/row2LinearLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:lines="2"
-            android:text="Button"
-            android:textColor="@color/button_text_color" />
-    </LinearLayout>
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:id="@+id/row2LinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <Button
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:lines="2"
+                android:text="Button"
+                android:textColor="@color/button_text_color" />
 
-        <Button
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="0dp"
+            <Button
+
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:lines="2"
+                android:text="Button"
+                android:textColor="@color/button_text_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/row3LinearLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:lines="2"
-            android:text="Button"
-            android:textColor="@color/button_text_color" />
+            android:orientation="horizontal">
 
-        <Button
+            <Button
 
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="0dp"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:lines="2"
+                android:text="Button"
+                android:textColor="@color/button_text_color" />
+
+            <Button
+
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:lines="2"
+                android:text="Button"
+                android:textColor="@color/button_text_color" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/row4LinearLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:lines="2"
-            android:text="Button"
-            android:textColor="@color/button_text_color" />
-    </LinearLayout>
+            android:orientation="horizontal">
 
-    <LinearLayout
-        android:id="@+id/row3LinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <Button
 
-        <Button
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:lines="2"
+                android:text="Button"
+                android:textColor="@color/button_text_color" />
 
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:lines="2"
-            android:text="Button"
-            android:textColor="@color/button_text_color" />
+            <Button
 
-        <Button
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:lines="2"
+                android:text="Button"
+                android:textColor="@color/button_text_color" />
+        </LinearLayout>
 
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:lines="2"
-            android:text="Button"
-            android:textColor="@color/button_text_color" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/row4LinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <Button
-
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:lines="2"
-            android:text="Button"
-            android:textColor="@color/button_text_color" />
-
-        <Button
-
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:lines="2"
-            android:text="Button"
-            android:textColor="@color/button_text_color" />
-    </LinearLayout>
 
     <TextView
         android:id="@+id/answerTextView"
