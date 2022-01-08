@@ -3,10 +3,10 @@ package com.ewelion85.flagsquiz;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
@@ -48,17 +48,18 @@ public class MainActivity extends AppCompatActivity {
         /* Pobranie rozmiaru ekranu urzadzenia */
         int screenSize = getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK;
 
-        /* Jezeli rozmiar ekranu jest typowy dla tabletu, to ... */
-        if (screenSize == Configuration.SCREENLAYOUT_SIZE_LARGE || screenSize == Configuration.SCREENLAYOUT_SIZE_XLARGE){
-            phoneDevice = false;
-        }
-
-        /* Jeseli uruchamiamy aplikacje na telefonie, to ... */
-        if (phoneDevice){
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-        }
+//        /* Jezeli rozmiar ekranu jest typowy dla tabletu, to ... */
+//        if (screenSize == Configuration.SCREENLAYOUT_SIZE_LARGE || screenSize == Configuration.SCREENLAYOUT_SIZE_XLARGE){
+//            phoneDevice = false;
+//        }
+//
+//        /* Jeseli uruchamiamy aplikacje na telefonie, to ... */
+//        if (phoneDevice){
+//            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+//        }
 
     }
+
 
     @Override
     protected void onStart() {
@@ -87,8 +88,6 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
 
-
-
     }
 
     @Override
@@ -96,12 +95,12 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+//        int id = item.getItemId();
 
-        //no inspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        //no inspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         Intent preferencesIntent = new Intent(this, SettingsActivity.class);
         startActivity(preferencesIntent);

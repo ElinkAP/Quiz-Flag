@@ -7,8 +7,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
     <string name="number_of_choices">Possibilities number</string>
     <string name="default_region">Europe</string>
     <string name="default_region_message">You have to choose at least one continent. The default continent is Europe.</string>

@@ -132,8 +132,13 @@ public class MainActivityFragment extends Fragment {
         /* Wyswietlenie formatowanego tekstu w widoku TextView */
         questionNumberTextView.setText(getString(R.string.question, 1, FLAGS_IN_QUIZ));
 
+//        if (savedInstanceState != null){
+//            correctAnswers = savedInstanceState.getInt("answered_questions");}
+
         /* Zwroc widok fragmentu do wyswietlenia */
         return view;
+
+
 
     }
 
@@ -156,6 +161,14 @@ public class MainActivityFragment extends Fragment {
         }
 
     }
+
+//    @Override
+//    public void onSaveInstanceState(@NonNull Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        outState.putInt("answered_questions", correctAnswers);
+//    }
+
+
 
     public void updateRegions(SharedPreferences sharedPreferences) {
 
