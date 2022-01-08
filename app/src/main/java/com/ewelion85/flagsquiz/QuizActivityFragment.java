@@ -33,7 +33,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-public class MainActivityFragment extends Fragment {
+public class QuizActivityFragment extends Fragment {
 
 
     /* Znacznik uzywany przy zapisie bledow w dzienniku Log */
@@ -145,7 +145,7 @@ public class MainActivityFragment extends Fragment {
     public void updateGuessRows(SharedPreferences sharedPreferences) {
 
         /* Pobranie informacji o ilosci przyciskow odpowiedzi do wyswietlenia */
-        String choices = sharedPreferences.getString(MainActivity.CHOICES, null);
+        String choices = sharedPreferences.getString(QuizActivity.CHOICES, null);
 
         /* Liczba wierszy z przyciskami odpowiedzi do wyswietlenia */
         guessRows = Integer.parseInt(choices) / 2;
@@ -173,7 +173,7 @@ public class MainActivityFragment extends Fragment {
     public void updateRegions(SharedPreferences sharedPreferences) {
 
         /* Pobranie informacji na temat wybranych przez uzytkownika obszarow */
-        regionSet = sharedPreferences.getStringSet(MainActivity.REGIONS, null);
+        regionSet = sharedPreferences.getStringSet(QuizActivity.REGIONS, null);
     }
 
     public void resetQuiz() {
