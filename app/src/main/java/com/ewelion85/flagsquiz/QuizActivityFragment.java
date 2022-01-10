@@ -36,6 +36,7 @@ import java.util.Set;
 public class QuizActivityFragment extends Fragment {
 
 
+
     /* Znacznik uzywany przy zapisie bledow w dzienniku Log */
     private static final String TAG = "QuizWithFlags Activity";
 

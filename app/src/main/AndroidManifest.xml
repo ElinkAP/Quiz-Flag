@@ -11,8 +11,7 @@
         android:theme="@style/Theme.FlagsQuiz">
         <activity
             android:name=".QuizActivity"
-            android:exported="true"
-            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden"/>
+            android:exported="true"/>
         <activity
             android:name=".SettingsActivity"
             android:exported="true"

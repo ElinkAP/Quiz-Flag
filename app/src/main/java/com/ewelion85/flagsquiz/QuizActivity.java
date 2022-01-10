@@ -5,6 +5,7 @@ import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
@@ -39,16 +40,20 @@ public class QuizActivity extends AppCompatActivity {
         /* Pobranie rozmiaru ekranu urzadzenia */
         int screenSize = getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK;
 
-//        /* Jezeli rozmiar ekranu jest typowy dla tabletu, to ... */
-//        if (screenSize == Configuration.SCREENLAYOUT_SIZE_LARGE || screenSize == Configuration.SCREENLAYOUT_SIZE_XLARGE){
-//            phoneDevice = false;
-//        }
-//
-//        /* Jeseli uruchamiamy aplikacje na telefonie, to ... */
-//        if (phoneDevice){
-//            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-//        }
+        /* Jezeli rozmiar ekranu jest typowy dla tabletu, to ... */
+        if (screenSize == Configuration.SCREENLAYOUT_SIZE_LARGE || screenSize == Configuration.SCREENLAYOUT_SIZE_XLARGE){
+            phoneDevice = false;
+        }
+
+        /* Jeseli uruchamiamy aplikacje na telefonie, to ... */
+        if (phoneDevice){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
+
     }
+
+
 
     @Override
     protected void onStart() {

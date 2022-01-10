@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <EditTextPreference
-        android:background="#EC9E9E"
-        android:key="edit_text_preference_1"
-        android:selectAllOnFocus="true"
-        android:selectable="false"
-        android:singleLine="false"
-        android:title="Changing the preferences will restart the quiz." />
+
     <ListPreference
         android:defaultValue="4"
         android:entries="@array/guesses_list"
