@@ -4,6 +4,11 @@
     tools:context="com.ewelion85.flagsquiz.MainActivity">
 
     <item
+        android:id="@+id/restart_quiz"
+        android:title="Restart Quiz"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/action_settings"
         android:title="@string/action_settings"
         app:showAsAction="never" />
@@ -11,8 +16,5 @@
         android:id="@+id/close_app"
         android:title="Close App"
         app:showAsAction="never" />
-    <item
-        android:id="@+id/restart_quiz"
-        android:title="Restart Quiz"
-        app:showAsAction="never" />
+
 </menu>

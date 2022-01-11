@@ -110,12 +110,35 @@ public class QuizActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                this.finish();
+                AlertDialog.Builder builder = new AlertDialog.Builder(QuizActivity.this);
+                builder.setMessage("Are you sure you want to terminate the quiz?")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent preferencesIntent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(preferencesIntent);
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .create()
+                        .show();
+
+                return true;
+            case R.id.restart_quiz:
+                QuizActivityFragment quizFragment = (QuizActivityFragment) getSupportFragmentManager().findFragmentById(R.id.quizFragment);
+                quizFragment.updateGuessRows(PreferenceManager.getDefaultSharedPreferences(this));
+                quizFragment.updateRegions(PreferenceManager.getDefaultSharedPreferences(this));
+                quizFragment.resetQuiz();
                 return true;
             case R.id.action_settings:
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(QuizActivity.this);
-                builder.setMessage("Changing the settings will restart the quiz.")
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(QuizActivity.this);
+                builder2.setMessage("Changing the settings will restart the quiz.")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -137,15 +160,14 @@ public class QuizActivity extends AppCompatActivity {
             case R.id.close_app:
                 closeApp();
                 return true;
-            case R.id.restart_quiz:
 
-                return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
     private void closeApp() {
+
         Intent homeIntent = new Intent(Intent.ACTION_MAIN);
         homeIntent.addCategory(Intent.CATEGORY_HOME);
         homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
