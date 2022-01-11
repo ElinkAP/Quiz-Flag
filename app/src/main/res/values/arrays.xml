@@ -11,13 +11,15 @@
     </string-array>
 
     <string-array name="regions_list_for_settings">
-        <item>Afryka</item>
-        <item>Azja</item>
-        <item>Europa</item>
-        <item>Ameryka Polnocna</item>
+        <item>Africa</item>
+        <item>Asia</item>
+        <item>Europe</item>
+        <item>North America</item>
         <item>Oceania</item>
-        <item>Ameryka Poludniowa</item>
+        <item>South America</item>
     </string-array>
+
+
 
     <string-array name="guesses_list">
         <item>2</item>

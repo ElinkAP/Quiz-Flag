@@ -13,8 +13,8 @@
 
     <MultiSelectListPreference
         android:defaultValue="@array/regions_list"
-        android:entries="@array/regions_list_for_settings"
-        android:entryValues="@array/regions_list"
+        android:entries="@array/regions_list"
+        android:entryValues="@array/regions_list_for_settings"
         android:key="pref_regionsToInclude"
         android:persistent="true"
         android:summary="@string/world_regions_descriptions"

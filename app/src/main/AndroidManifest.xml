@@ -11,11 +11,17 @@
         android:theme="@style/Theme.FlagsQuiz">
         <activity
             android:name=".QuizActivity"
-            android:exported="true"/>
+            android:exported="true"
+            android:parentActivityName=".MainActivity">
+
+        </activity>
         <activity
             android:name=".SettingsActivity"
             android:exported="true"
-            android:label="Settings" />
+            android:label="Settings"
+            android:parentActivityName=".QuizActivity">
+
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true"
