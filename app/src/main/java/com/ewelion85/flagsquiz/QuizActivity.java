@@ -1,5 +1,6 @@
 package com.ewelion85.flagsquiz;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
@@ -35,7 +37,7 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.quiz_activity);
 
         /* Przypisywanie domyslnych ustawien do obiektu SharedPreferences */
-        PreferenceManager.setDefaultValues(this, R.xml.preferences,false);
+        PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
         /* Rejestrowanie obiektu nasluchujacego zmian obiektu SharedPreferences */
         PreferenceManager.getDefaultSharedPreferences(this).registerOnSharedPreferenceChangeListener(preferenceChangeListener);
@@ -44,12 +46,12 @@ public class QuizActivity extends AppCompatActivity {
         int screenSize = getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK;
 
         /* Jezeli rozmiar ekranu jest typowy dla tabletu, to ... */
-        if (screenSize == Configuration.SCREENLAYOUT_SIZE_LARGE || screenSize == Configuration.SCREENLAYOUT_SIZE_XLARGE){
+        if (screenSize == Configuration.SCREENLAYOUT_SIZE_LARGE || screenSize == Configuration.SCREENLAYOUT_SIZE_XLARGE) {
             phoneDevice = false;
         }
 
         /* Jeseli uruchamiamy aplikacje na telefonie, to ... */
-        if (phoneDevice){
+        if (phoneDevice) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
 
@@ -74,12 +76,11 @@ public class QuizActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     protected void onStart() {
         super.onStart();
 
-        if (preferencesChanged){
+        if (preferencesChanged) {
             QuizActivityFragment quizFragment = (QuizActivityFragment) getSupportFragmentManager().findFragmentById(R.id.quizFragment);
             quizFragment.updateGuessRows(PreferenceManager.getDefaultSharedPreferences(this));
             quizFragment.updateRegions(PreferenceManager.getDefaultSharedPreferences(this));
@@ -94,7 +95,7 @@ public class QuizActivity extends AppCompatActivity {
         /* Pobranie informacji o orientacji urzadzenia */
         int orientation = getResources().getConfiguration().orientation;
 
-        if (orientation == Configuration.ORIENTATION_PORTRAIT){
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             // Inflate the menu; this adds items to the action bar if it is present.
             getMenuInflater().inflate(R.menu.menu_main, menu);
             return true;
@@ -106,33 +107,35 @@ public class QuizActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-//        int id = item.getItemId();
-
-//        //no inspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-
-//        Intent preferencesIntent = new Intent(this, SettingsActivity.class);
-//        startActivity(preferencesIntent);
-
 
         switch (item.getItemId()) {
             case android.R.id.home:
                 this.finish();
                 return true;
             case R.id.action_settings:
-                Intent preferencesIntent = new Intent(this, SettingsActivity.class);
-                startActivity(preferencesIntent);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(QuizActivity.this);
+                builder.setMessage("Changing the settings will restart the quiz.")
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent preferencesIntent = new Intent(getApplicationContext(), SettingsActivity.class);
+                                startActivity(preferencesIntent);
+                            }
+                        })
+                        .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        })
+                        .create()
+                        .show();
+
                 return true;
+
             case R.id.close_app:
-                Intent homeIntent = new Intent(Intent.ACTION_MAIN);
-                homeIntent.addCategory( Intent.CATEGORY_HOME );
-                homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(homeIntent);
+                closeApp();
                 return true;
             case R.id.restart_quiz:
 
@@ -142,6 +145,13 @@ public class QuizActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void closeApp() {
+        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+        homeIntent.addCategory(Intent.CATEGORY_HOME);
+        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(homeIntent);
+    }
+
 
     /* Obiekt nasluchujacy zmian obiektu SharedPreferences */
     private SharedPreferences.OnSharedPreferenceChangeListener preferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
@@ -149,13 +159,13 @@ public class QuizActivity extends AppCompatActivity {
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
 
             /* Uzytkownik zmienil ustawienia aplikacji */
-            preferencesChanged= true;
+            preferencesChanged = true;
 
             /* Inicjalizacja obiektu MainActivityFragment */
             QuizActivityFragment quizFragment = (QuizActivityFragment) getSupportFragmentManager().findFragmentById(R.id.quizFragment);
 
             /* Instrukcja warunkowa dla rodzaju zmienionych ustawien */
-            if(key.equals(CHOICES)){
+            if (key.equals(CHOICES)) {
 
                 /* Aktualizacja liczby wyswietlanych wierszy z przyciskami odpowiedzi */
                 quizFragment.updateGuessRows(sharedPreferences);
@@ -163,13 +173,13 @@ public class QuizActivity extends AppCompatActivity {
                 /* Zresetowanie quizu */
                 quizFragment.resetQuiz();
 
-            } else if (key.equals(REGIONS)){
+            } else if (key.equals(REGIONS)) {
 
                 /* Pobranie listy wybranych obszarow... */
                 Set<String> regions = sharedPreferences.getStringSet(REGIONS, null);
 
                 /* Jezeli wybrano wiecej niz jeden obszar... */
-                if(regions != null && regions.size()> 0){
+                if (regions != null && regions.size() > 0) {
                     quizFragment.updateRegions(sharedPreferences);
                     quizFragment.resetQuiz();
                 }

@@ -13,7 +13,7 @@
     <string name="default_region_message">You have to choose at least one continent. The default continent is Europe.</string>
     <string name="guess_country">What country is it?</string>
     <string name="image_description">Picture of the current flag</string>
-    <string name="incorrect_answer">Error!</string>
+    <string name="incorrect_answer">Wrong answer!</string>
     <string name="number_of_choices_description">2, 4, 6 or 8 choices</string>
     <string name="question">Question %1$d from %2$d</string>
     <string name="reset_quiz">Reset quiz</string>

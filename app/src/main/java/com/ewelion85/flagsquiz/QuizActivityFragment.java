@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -88,6 +89,8 @@ public class QuizActivityFragment extends Fragment {
     /* Widok wyswietlajacy poprawna odpowiedz w quizie */
     private TextView answerTextView;
 
+    MediaPlayer player;
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -136,8 +139,12 @@ public class QuizActivityFragment extends Fragment {
 //        if (savedInstanceState != null){
 //            correctAnswers = savedInstanceState.getInt("answered_questions");}
 
+        player = MediaPlayer.create(getActivity(), R.raw.applause);
+
         /* Zwroc widok fragmentu do wyswietlenia */
         return view;
+
+
 
 
 
@@ -368,8 +375,9 @@ public class QuizActivityFragment extends Fragment {
                 ++correctAnswers;
 
                 /* Wyswietlenie informacji zwrotnej dla uzytkownika o udzieleniu poprawnej odpowiedzi */
-                answerTextView.setText(answer + "!");
-                answerTextView.setTextColor(getResources().getColor(R.color.correct_answer, getContext().getTheme()));
+                answerTextView.setText("Bravo, this is a flag of " + answer + "!' " + "\uD83D\uDC4F");
+                player.start();
+                answerTextView.setTextColor(getResources().getColor(R.color.dark_green, getContext().getTheme()));
 
                 /* Dezaktywacja wszystkich przyciskow odpowiedzi */
                 disableButtons();
