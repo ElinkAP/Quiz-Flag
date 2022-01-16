@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -74,6 +77,9 @@ public class QuizActivity extends AppCompatActivity {
         // showing the back button in action bar
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+     transparentActionBar();
+
+
 
     }
 
@@ -90,6 +96,13 @@ public class QuizActivity extends AppCompatActivity {
             preferencesChanged = false;
         }
     }
+
+    private void transparentActionBar() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -112,7 +125,7 @@ public class QuizActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case android.R.id.home:
-                AlertDialog.Builder builder = new AlertDialog.Builder(QuizActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(QuizActivity.this, R.style.YourAlertDialogTheme);
                 builder.setMessage("Are you sure you want to terminate the quiz?")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override

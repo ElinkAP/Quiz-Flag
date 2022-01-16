@@ -3,9 +3,12 @@ package com.ewelion85.flagsquiz;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -24,6 +27,8 @@ public class SettingsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_settings);
 
         startButton = findViewById(R.id.start_button);
+
+        transparentActionBar();
 
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,5 +51,15 @@ public class SettingsActivity extends AppCompatActivity {
         if (MainActivity.currentApiVersion >= Build.VERSION_CODES.KITKAT) {
             getWindow().getDecorView().setSystemUiVisibility(flags);
         }
+
+
+
     }
+
+    private void transparentActionBar() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    }
+
 }

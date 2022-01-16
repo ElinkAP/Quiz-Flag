@@ -4,11 +4,13 @@
 
     <item>
         <shape>
+            <corners android:radius="20dp"/>
             <gradient
-                android:gradientRadius="500dp"
-                android:endColor="#2824B8"
+                android:gradientRadius="40dp"
+                android:endColor="#093FE9"
                 android:startColor="#27BECA"
-                android:type="radial" />
+                android:angle="270"
+                android:type="linear" />
         </shape>
     </item>
 </selector>
