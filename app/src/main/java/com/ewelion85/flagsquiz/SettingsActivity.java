@@ -1,12 +1,18 @@
 package com.ewelion85.flagsquiz;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
+
+import java.util.Set;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -22,8 +28,14 @@ public class SettingsActivity extends AppCompatActivity {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent settingsActivityIntent = new Intent(SettingsActivity.this, QuizActivity.class);
-                startActivity(settingsActivityIntent);
+                MainActivity.regions = PreferenceManager.getDefaultSharedPreferences(getApplication()).getStringSet("pref_regionsToInclude", null);
+                if (MainActivity.regions != null && MainActivity.regions.size()>0) {
+                    Intent settingsActivityIntent = new Intent(SettingsActivity.this, QuizActivity.class);
+                    startActivity(settingsActivityIntent);
+                } else {
+                    Toast.makeText(SettingsActivity.this, "Please choose at least one region", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 

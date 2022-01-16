@@ -16,9 +16,9 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="120dp"
         android:layout_marginBottom="@dimen/spacing"
-android:textSize="25sp"
         android:text="@string/question"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textSize="25sp" />
 
     <ImageView
         android:id="@+id/flagImageView"
@@ -40,9 +40,9 @@ android:textSize="25sp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="8dp"
-        android:textSize="25sp"
         android:text="@string/guess_country"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textSize="25sp" />
 
 
     <LinearLayout
@@ -156,10 +156,10 @@ android:textSize="25sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
         android:gravity="center_horizontal"
         android:text="TextView"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textStyle="bold" />
 

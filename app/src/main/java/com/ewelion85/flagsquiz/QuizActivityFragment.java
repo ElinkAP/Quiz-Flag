@@ -37,7 +37,6 @@ import java.util.Set;
 public class QuizActivityFragment extends Fragment {
 
 
-
     /* Znacznik uzywany przy zapisie bledow w dzienniku Log */
     private static final String TAG = "QuizWithFlags Activity";
 
@@ -136,16 +135,10 @@ public class QuizActivityFragment extends Fragment {
         /* Wyswietlenie formatowanego tekstu w widoku TextView */
         questionNumberTextView.setText(getString(R.string.question, 1, FLAGS_IN_QUIZ));
 
-//        if (savedInstanceState != null){
-//            correctAnswers = savedInstanceState.getInt("answered_questions");}
-
         player = MediaPlayer.create(getActivity(), R.raw.applause);
 
         /* Zwroc widok fragmentu do wyswietlenia */
         return view;
-
-
-
 
 
     }
@@ -170,18 +163,15 @@ public class QuizActivityFragment extends Fragment {
 
     }
 
-//    @Override
-//    public void onSaveInstanceState(@NonNull Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        outState.putInt("answered_questions", correctAnswers);
-//    }
-
-
 
     public void updateRegions(SharedPreferences sharedPreferences) {
 
         /* Pobranie informacji na temat wybranych przez uzytkownika obszarow */
+
+
         regionSet = sharedPreferences.getStringSet(QuizActivity.REGIONS, null);
+
+
     }
 
     public void resetQuiz() {
@@ -383,7 +373,7 @@ public class QuizActivityFragment extends Fragment {
                 disableButtons();
 
                 /* Jezeli uzytkownik udzielil odpowiedzi na wszystkie pytania */
-                if (correctAnswers == FLAGS_IN_QUIZ){
+                if (correctAnswers == FLAGS_IN_QUIZ) {
                     /* Utworzenie obiektu AlertDialog ze spersonalizowanym tekstem oraz przyciskiem */
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setTitle("Quiz results");
@@ -431,10 +421,10 @@ public class QuizActivityFragment extends Fragment {
         }
     };
 
-    private void disableButtons(){
-        for (int row = 0; row < guessRows; row++){
+    private void disableButtons() {
+        for (int row = 0; row < guessRows; row++) {
             LinearLayout guessRow = guessLinearLayouts[row];
-            for (int column = 0; column <2; column++){
+            for (int column = 0; column < 2; column++) {
                 guessRow.getChildAt(column).setEnabled(false);
             }
         }

@@ -15,6 +15,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.MultiSelectListPreference;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceManager;
 
 import java.util.Set;
@@ -208,13 +210,19 @@ public class QuizActivity extends AppCompatActivity {
 
                 /* Jezeli nie wybrano zadnego obszaru... */
                 else {
+
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    regions.add(getString(R.string.default_region));
                     editor.putStringSet(REGIONS, regions);
+                    regions.add(getString(R.string.default_region));
+
                     editor.apply();
+
+
 
                     Toast.makeText(QuizActivity.this, R.string.default_region_message, Toast.LENGTH_SHORT).show();
                 }
+
+
 
                 /* Informowanie uzytkowanika o restarcie quizu */
                 Toast.makeText(QuizActivity.this, R.string.restarting_quiz, Toast.LENGTH_SHORT).show();
