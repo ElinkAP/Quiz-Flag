@@ -152,7 +152,7 @@ public class QuizActivity extends AppCompatActivity {
                 return true;
             case R.id.action_settings:
 
-                AlertDialog.Builder builder2 = new AlertDialog.Builder(QuizActivity.this);
+                AlertDialog.Builder builder2 = new AlertDialog.Builder(QuizActivity.this, R.style.YourAlertDialogTheme);
                 builder2.setMessage("Changing the settings will restart the quiz.")
                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                             @Override

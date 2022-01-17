@@ -367,7 +367,7 @@ public class QuizActivityFragment extends Fragment {
                 /* Wyswietlenie informacji zwrotnej dla uzytkownika o udzieleniu poprawnej odpowiedzi */
                 answerTextView.setText("Bravo, this is a flag of " + answer + "!' " + "\uD83D\uDC4F");
                 player.start();
-                answerTextView.setTextColor(getResources().getColor(R.color.dark_green, getContext().getTheme()));
+                answerTextView.setTextColor(getResources().getColor(R.color.correct_answer, getContext().getTheme()));
 
                 /* Dezaktywacja wszystkich przyciskow odpowiedzi */
                 disableButtons();
