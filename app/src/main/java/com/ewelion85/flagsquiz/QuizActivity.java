@@ -54,10 +54,10 @@ public class QuizActivity extends AppCompatActivity {
             phoneDevice = false;
         }
 
-//        /* Jeseli uruchamiamy aplikacje na telefonie, to ... */
-//        if (phoneDevice) {
-//            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-//        }
+        /* Jeseli uruchamiamy aplikacje na telefonie, to ... */
+        if (phoneDevice) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
 
 
         final int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE |

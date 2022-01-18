@@ -18,7 +18,7 @@
         android:entryValues="@array/regions_list"
         android:key="pref_regionsToInclude"
         android:persistent="true"
-
+android:defaultValue="@array/regions_default"
         android:summary="@string/world_regions_descriptions"
         android:title="@string/world_regions" />
 

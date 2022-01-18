@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected static int currentApiVersion = android.os.Build.VERSION.SDK_INT;
 
     SharedPreferences mSharedPreferences;
-    protected static Set<String> regions;
+    protected static Set<String> regions = null;
     String numberOfChoices;
 
     TextView mainTextView;
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
 
     @NonNull
     private String getText1() {
-        if (regions.size() > 1){
+        if (regions.size() > 1 && regions!= null){
             return "s are";
         } else {
             return " is";
