@@ -3,6 +3,7 @@ package com.ewelion85.flagsquiz;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.preference.PreferenceManager;
@@ -69,13 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        String isAre = null;
-        if (regions.size() <= 1 || regions==null) {
-            isAre = " is";
-        } else if (regions.size() > 1) {
-            isAre = "s are";
-        }
-        mainTextView.setText(getString(R.string.settings_info, numberOfChoices, isAre, convertToString()));
+        mainTextView.setText(getString(R.string.settings_info, numberOfChoices, getText1(), convertToString(), getText2()));
 
 
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +88,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private String getText2() {
+
+        int orientation = getResources().getConfiguration().orientation;
+
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            return "below.";
+        } else {
+            return "here " +  "\u2794";
+        }
+    }
+
+    @NonNull
+    private String getText1() {
+        if (regions.size() > 1){
+            return "s are";
+        } else {
+            return " is";
+        }
     }
 
     protected void transparentActionBar() {
@@ -133,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
         } else if (mRegions == null || mRegions.length == 0){
             return "0";
         } else {
-            String myRegions = mRegions[0];
+            String myRegions = mRegions[0].replace("_", " ");
             for (int i = 1; i < mRegions.length; i++){
                 myRegions += ", " + mRegions[i].replace("_", " ");
             }
@@ -164,13 +180,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
-            String isAre = null;
-            if (regions.size() <= 1 || regions==null) {
-                isAre = " is";
-            } else if (regions.size() > 1) {
-                isAre = "s are";
-            }
-            mainTextView.setText(getString(R.string.settings_info, numberOfChoices, isAre, convertToString()));
+
+            mainTextView.setText(getString(R.string.settings_info, numberOfChoices, getText1(), convertToString(), getText2()));
         }
     };
 

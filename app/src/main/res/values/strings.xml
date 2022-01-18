@@ -22,5 +22,5 @@
     <string name="world_regions">Regions</string>
     <string name="world_regions_descriptions">Selected regions</string>
     <string name="title_activity_settings">SettingsActivity</string>
-    <string name="settings_info">Choose the right flag out of %1$s. The current selected region%2$s: %3$s. You can amend your options below.</string>
+    <string name="settings_info">Choose the right flag out of %1$s. The current selected region%2$s: %3$s. You can amend your options %4$s</string>
 </resources>
