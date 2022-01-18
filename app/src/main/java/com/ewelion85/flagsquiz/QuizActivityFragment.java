@@ -2,7 +2,6 @@ package com.ewelion85.flagsquiz;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
@@ -37,82 +36,80 @@ import java.util.Set;
 public class QuizActivityFragment extends Fragment {
 
 
-    /* Znacznik uzywany przy zapisie bledow w dzienniku Log */
+    /* TAG used to track errors */
     private static final String TAG = "QuizWithFlags Activity";
 
-    /* Liczba flag bioracych udzial w quizie */
+    /* Amount of flags in quiz */
     private static final int FLAGS_IN_QUIZ = 10;
 
-    /* Nazwy plikow z obrazami flag */
+    /* Names of files with flags */
     private List<String> fileNameList;
 
-    /* Lista plikow3 z obrazami flag bioracych udzial w biezacym quizie */
+    /* List of files (countries) included in quiz */
     private List<String> quizCountriesList;
 
-    /* Wybrane obszary biorace udzial w quizie */
+    /* Selected regions included in quiz */
     private Set<String> regionSet;
 
-    /* Poprawna nazwa kraju przypisana do biezacej flagi */
+    /* Correct name of the country linked with a flag */
     private String correctAnswer;
 
-    /* Calkowita liczba odpowiedzi */
+    /* Amount of all answers */
     private int totalGuesses;
 
-    /* Liczba poprawnych odpowiedzi */
+    /* Amount of correct answers */
     private int correctAnswers;
 
-    /* Liczba wierszy przyciskow odpowiedzi wyswietlanych na ekranie */
+    /* Amount of rows with buttons (with names of countries) */
     private int guessRows;
 
-    /* Obiekt sluzacy do losowania */
+    /* Object used to generate strong random number */
     private SecureRandom random;
 
-    /* Obiekt uzywany podczas opozniania procesu ladowania kolejnej flagi w quizie */
+    /* Object used to delay loading next flag */
     private Handler handler;
 
-    /* Animacja blednej odpowiedzi */
+    /* Animation for wrong answer */
     private Animation shakeAnimation;
 
-    /* Glowny rozklad aplikacji */
+    /* Main layout for quiz */
     private LinearLayout quizLinearLayout;
 
-    /* Widok wyswietlajacy numer biezacego pytania quizu */
+    /* TextView with a number of the current question */
     private TextView questionNumberTextView;
 
-    /* Widok wyswietlajacy biezaca flage */
+    /* ImageView with a current flag */
     private ImageView flagImageView;
 
-    /* Tablica zawierajaca wiersze przyciskow odpowiedzi */
+    /* Array with the buttons with possible answers */
     private LinearLayout[] guessLinearLayouts;
 
-    /* Widok wyswietlajacy poprawna odpowiedz w quizie */
+    /* TextView showing the correct answer or info that the answer is wrong */
     private TextView answerTextView;
 
+    /* Object used to play a sound after a correct answer */
     MediaPlayer player;
 
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-
-
-        /* Zainicjowanie graficznego interfejsu uzytkownika dla fragmentu */
         super.onCreateView(inflater, container, savedInstanceState);
 
-        /* Pobranie rozkladu dla fragmentu */
+        /* Gets a layout for the fragment */
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
-        /* Inicjalizacja wybranych pol */
+        /* Initialisation of the main widgets */
         fileNameList = new ArrayList<>();
         quizCountriesList = new ArrayList<>();
         random = new SecureRandom();
         handler = new Handler();
 
-        /* Inicjalizacja animacji */
+        /* Initialization of the animation */
         shakeAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.incorrect_shake);
         shakeAnimation.setRepeatCount(3);
 
-        /* Inicjalizacja komponentow graficznego interfejsu uzytkownika */
+        /* Initialization of 'user interface' */
         quizLinearLayout = view.findViewById(R.id.quizLinearLayout);
         questionNumberTextView = view.findViewById(R.id.questionNumberTextView);
         flagImageView = view.findViewById(R.id.flagImageView);
@@ -124,7 +121,7 @@ public class QuizActivityFragment extends Fragment {
         guessLinearLayouts[3] = view.findViewById(R.id.row4LinearLayout);
         answerTextView = view.findViewById(R.id.answerTextView);
 
-        /* Konfiguracja nasluchiwania zdarzen w przyciskach odpowiedzi */
+        /* Registers listeners for the buttons */
         for (LinearLayout row : guessLinearLayouts) {
             for (int column = 0; column < row.getChildCount(); column++) {
                 Button button = (Button) row.getChildAt(column);
@@ -132,12 +129,13 @@ public class QuizActivityFragment extends Fragment {
             }
         }
 
-        /* Wyswietlenie formatowanego tekstu w widoku TextView */
+        /* Sets text for the textView with question number */
         questionNumberTextView.setText(getString(R.string.question, 1, FLAGS_IN_QUIZ));
 
+        /* Registers a sound for the player */
         player = MediaPlayer.create(getActivity(), R.raw.applause);
 
-        /* Zwroc widok fragmentu do wyswietlenia */
+
         return view;
 
 
@@ -145,18 +143,18 @@ public class QuizActivityFragment extends Fragment {
 
     public void updateGuessRows(SharedPreferences sharedPreferences) {
 
-        /* Pobranie informacji o ilosci przyciskow odpowiedzi do wyswietlenia */
-        String choices = sharedPreferences.getString(QuizActivity.CHOICES, null);
+        /* Gets information how many buttons to show */
+        String choices = sharedPreferences.getString(MainActivity.CHOICES, null);
 
-        /* Liczba wierszy z przyciskami odpowiedzi do wyswietlenia */
+        /* Amount of rows with buttons (5 buttons per row) */
         guessRows = Integer.parseInt(choices) / 2;
 
-        /* Ukrycie wszystkich wierszy z przyciskami */
+        /* Hides all rows with buttons */
         for (LinearLayout layout : guessLinearLayouts) {
             layout.setVisibility(View.GONE);
         }
 
-        /* Wyswietlenie okreslonej liczby wierszy z przyciskami odpowiedzi */
+        /* Shows the selected amount of buttons */
         for (int row = 0; row < guessRows; row++) {
             guessLinearLayouts[row].setVisibility(View.VISIBLE);
         }
@@ -166,32 +164,32 @@ public class QuizActivityFragment extends Fragment {
 
     public void updateRegions(SharedPreferences sharedPreferences) {
 
-        /* Pobranie informacji na temat wybranych przez uzytkownika obszarow */
+        /* Gets the selected regions */
 
 
-        regionSet = sharedPreferences.getStringSet(QuizActivity.REGIONS, null);
+        regionSet = sharedPreferences.getStringSet(MainActivity.REGIONS, null);
 
 
     }
 
     public void resetQuiz() {
 
-        /* Uzyskaj dostep do folderu assets */
+        /* Gets access to Assets */
         AssetManager assets = getActivity().getAssets();
 
-        /* Wyczysc liste z nazwami flag */
+        /* Clears the list with names of flags */
         fileNameList.clear();
 
-        /* Pobierz nazwy plikow obrazow flag z wybranych przez uzytkownika obszarow */
+        /* Gets names of files with flags from selected regions */
         try {
 
-            /* Petla przechodzaca przez kazdy obszar - czyli przez kazdy folder w folderze assets */
+            /* Loop through every region = every directory in Assets folder */
             for (String region : regionSet) {
 
-                /* Pobranie nazw wszystkich plikow znajdujacych sie w folderze danego obszaru */
+                /* Gets files names from every region directory */
                 String[] paths = assets.list(region);
 
-                /* Usuniecie z nazw plikow ich rozszerzenia formatu */
+                /* Removes .png from every file name */
                 for (String path : paths) {
                     fileNameList.add(path.replace(".png", ""));
                 }
@@ -202,95 +200,95 @@ public class QuizActivityFragment extends Fragment {
             Log.e(TAG, "Error while loading the flags", ex);
         }
 
-        /* Zresetowanie liczby poprawnych i wszystkich udzielonych odpowiedzi */
+        /* Resets correct answers and all answers counters */
         correctAnswers = 0;
         totalGuesses = 0;
 
-        /* Wyczyszczenie listy krajow */
+        /* Clears a list of countries */
         quizCountriesList.clear();
 
-        /* Inicjalizacja zmiennych wykorzystywanych przy losowaniu flag */
+        /* Initialisation of variables used to draw flags */
         int flagCounter = 1;
         int numberOfFlags = fileNameList.size();
 
-        /* Losowanie flag */
+        /* Draws flags */
         while (flagCounter <= FLAGS_IN_QUIZ) {
 
-            /* Wybierz losowa wartosc z zakresu od "0" do "liczby flag" bioracych udzial w quizie */
+            /* Chooses a random number from 0 to amount of flags selected in quiz */
             int randomIndex = random.nextInt(numberOfFlags);
 
-            /* Pobierz nazwe pliku o wylosowanym indeksie */
+            /* Gets a name of file of randomly selected index */
             String fileName = fileNameList.get(randomIndex);
 
-            /* Jezeli plik o tej nazwie nie zostal jeszcze wylosowany, to dodaj go do listy wybranych krajow */
+            /* If the file has not been selected yet, adds the file to the list */
             if (!quizCountriesList.contains(fileName)) {
                 quizCountriesList.add(fileName);
                 ++flagCounter;
             }
         }
 
-        /* Zaladuj flage */
+        /* load a flag */
         loadNextFlag();
 
     }
 
     private void loadNextFlag() {
 
-        /* Ustalenie nazwy pliku biezacej flagi */
+        /* Gets a name of the current/selected flag */
         String nextImage = quizCountriesList.remove(0);
 
-        /* Zaktualizowanie widoku TextView */
+        /* Updates the TextView */
         correctAnswer = nextImage;
 
-        /* Wyczyszczenie widoku TextView */
+        /* Clears the TextView */
         answerTextView.setText("");
 
-        /* Wyswietlenie numeru biezacego pytania*/
+        /* Shows the number of the current question */
         questionNumberTextView.setText(getString(R.string.question, (correctAnswers + 1), FLAGS_IN_QUIZ));
 
-        /* Pobieranie nazwy obszaru biezacej flagi */
+        /* Gets a name of the region of the randomly selected flag */
         String region = nextImage.substring(0, nextImage.indexOf("-"));
 
-        /* Uzyskanie dostepu do folderu assets */
+        /* Gets access to Assets */
         AssetManager assets = getActivity().getAssets();
 
         try (InputStream inputStreamFlag = assets.open(region + "/" + nextImage + ".png")) {
 
-            /* Zaladowanie obrazu flagi jako obiekt Drawable */
+            /* Loads a flag as a Drawable object */
             Drawable flag = Drawable.createFromStream(inputStreamFlag, nextImage);
 
-            /* Obsadzenie obiektu Drawable (flagi) w widoku ImageView */
+            /* Sets the Drawable object in the ImageView widget */
             flagImageView.setImageDrawable(flag);
 
-            /* Animacja wejscia flagi na ekran */
+            /* Flag appears on the screen (animation) */
             animate(false);
 
         } catch (IOException e) {
             Log.e(TAG, "loadNextFlag: Error while loading " + nextImage, e);
         }
 
-        /* Przemieszanie nazw plikow */
+        /* Shuffles file names */
         Collections.shuffle(fileNameList);
 
-        /* Umieszczenie prawidlowej odpowiedzi na koncu listy */
+        /* Adds the correct answer at the end of the list */
         int correct = fileNameList.indexOf(correctAnswer);
         fileNameList.add(fileNameList.remove(correct));
 
-        /* Dodanie tekstu do przyciskow odpowiedzi */
+        /* Adds text to the buttons with possible answers */
         for (int row = 0; row < guessRows; row++) {
             for (int column = 0; column < 2; column++) {
 
-                /* Uzyskanie dostepu do przycisku i zmienienie jego stanu na 'enabled' */
+                /* Gets access to a button and changes its state to 'enabled' */
                 Button guessButton = (Button) guessLinearLayouts[row].getChildAt(column);
                 guessButton.setEnabled(true);
 
-                /* Pobierz nazwe kraju i ustaw ja w widoku Button */
+                /* Gets a name of the country and adds as a text to the button */
                 String fileName = fileNameList.get((row * 2) + column);
                 guessButton.setText(getCountryName(fileName));
             }
         }
 
-        /* Dodanie poprawnej odpowiedzi do losowo wybranego przycisku */
+        /* Adds a correct answer to a random button */
         int row = random.nextInt(guessRows);
         int column = random.nextInt(2);
         LinearLayout randomRow = guessLinearLayouts[row];
@@ -305,7 +303,7 @@ public class QuizActivityFragment extends Fragment {
 
     private void animate(boolean outAnimate) {
 
-        /* Nie tworzymy animacji przy wyswietlaniu pierwszej flagi */
+        /* No animation for 1st flag */
         if (correctAnswers == 0) return;
 
         /* Find a centre of the quizLinearLayout */
@@ -315,16 +313,16 @@ public class QuizActivityFragment extends Fragment {
         /* Calculate a radius of the animation */
         int radius = Math.max(quizLinearLayout.getWidth(), quizLinearLayout.getHeight());
 
-        /* Zdefiniowanie obiektu animacji */
+        /* Animation object */
         Animator animator;
 
-        /* Wariant animacji akrywajacej flage */
+        /* Animation for hiding a flag */
         if (outAnimate) {
 
-            /* Utworzenie aniamcji */
+            /* Creates an animation */
             animator = ViewAnimationUtils.createCircularReveal(quizLinearLayout, centerX, centerY, radius, 0);
 
-            /* Gdy animacja sie skonczy... */
+            /* When the animation finishes.. */
             animator.addListener(new AnimatorListenerAdapter() {
                 @Override
                 public void onAnimationEnd(Animator animation) {
@@ -338,10 +336,10 @@ public class QuizActivityFragment extends Fragment {
             animator = ViewAnimationUtils.createCircularReveal(quizLinearLayout, centerX, centerY, 0, radius);
         }
 
-        /* Okreslenie czasu trwania animacji */
+        /* Sets time for the animation */
         animator.setDuration(500);
 
-        /* Uruchomienie animacji */
+        /* Starts animation */
         animator.start();
 
     }
@@ -350,48 +348,44 @@ public class QuizActivityFragment extends Fragment {
         @Override
         public void onClick(View v) {
 
-            /* Pobranie nacisnietego przycisku oraz wyswietlanego przez niego tekstu */
+            /* Gets text from the selected button */
             Button guessButton = (Button) v;
             String guess = guessButton.getText().toString();
             String answer = getCountryName(correctAnswer);
 
-            /* Inkrementacja liczby odpowiedzi udzielonych przez uzytkownika w quizie */
+            /* Incrementation of all answers */
             ++totalGuesses;
 
-            /* Jezeli udzielona odpowiedz jest poprawna */
+            /* If the answer is correct */
             if (guess.equals(answer)) {
 
-                /* Inkrementacja liczby poprawnych odpowiedzi */
+                /* Incrementation of correct answers */
                 ++correctAnswers;
 
-                /* Wyswietlenie informacji zwrotnej dla uzytkownika o udzieleniu poprawnej odpowiedzi */
+                /* Lets user know that the answer was correct */
                 {
-                    answerTextView.setText("Bravo, this is a flag of " + answer + "!' " + "\uD83D\uDC4F");
+                    answerTextView.setText(getString(R.string.correct_answer_reply, answer));
                     player.start();
                     answerTextView.setTextColor(getResources().getColor(R.color.correct_answer, getContext().getTheme()));
                 }
 
-                /* Dezaktywacja wszystkich przyciskow odpowiedzi */
+                /* Disable all buttons */
                 disableButtons();
 
-                /* Jezeli uzytkownik udzielil odpowiedzi na wszystkie pytania */
+                /* If the user answered all questions... */
                 if (correctAnswers == FLAGS_IN_QUIZ) {
-                    /* Utworzenie obiektu AlertDialog ze spersonalizowanym tekstem oraz przyciskiem */
+
+                    /* Creates AlertDialog object with a text and a reset quiz button */
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.YourAlertDialogTheme);
-                    builder.setTitle("Quiz results");
+                    builder.setTitle(R.string.quiz_results);
                     builder.setMessage(getString(R.string.results, totalGuesses, (1000 / (double) totalGuesses)));
-                    builder.setPositiveButton(R.string.reset_quiz, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            resetQuiz();
-                        }
-                    });
+                    builder.setPositiveButton(R.string.reset_quiz, (dialog, which) -> resetQuiz());
 
                     builder.setCancelable(false);
                     builder.show();
                 }
 
-                /* Jezeli uzytkownik nie udzielil odpowiedzi na wszystkie pytania */
+                /* If the user has not answer all questions.. */
                 else {
 
                     /* Wait 2s and load next flag */
@@ -406,16 +400,16 @@ public class QuizActivityFragment extends Fragment {
 
             }
 
-            /* Jezeli udzielona odpowiedz nie jest poprawna */
+            /* If the answer is incorrect... */
             else {
-                /* Odtworzenie animacji trzesacej sie flagi */
+                /* Plays animation for a shaking flag */
                 flagImageView.startAnimation(shakeAnimation);
 
-                /* Wyswietlenie informacji zwrotnej dla uzytkownika o udzieleniu blednej odpowiedzi */
+                /* Lets the user know that the answer was incorrect */
                 answerTextView.setText(R.string.incorrect_answer);
                 answerTextView.setTextColor(getResources().getColor(R.color.incorrect_answer, getContext().getTheme()));
 
-                /* Dezaktywacja przycisku z bledna odpowiedzia */
+                /* Disables a button with the incorrect answer */
                 guessButton.setEnabled(false);
             }
 

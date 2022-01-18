@@ -9,7 +9,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="very_dark_blue">#FF081166</color>
-    <color name="lightish_blue">#FF4aa0a8</color>
+    <color name="lightish_blue">#FF4AA0A8</color>
+    <color name="menu_light">#FF4A86A8</color>
+    <color name="menu_dark">#FF1A82A0</color>
 
 
     <color name="correct_answer">#00CC00</color>

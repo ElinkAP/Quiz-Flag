@@ -1,6 +1,7 @@
 package com.ewelion85.flagsquiz;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
@@ -16,10 +17,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import androidx.preference.PreferenceManager;
 
 import java.util.Set;
@@ -27,15 +25,18 @@ import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
-    Button startButton;
+
     protected static int currentApiVersion = android.os.Build.VERSION.SDK_INT;
+
+    /* Preferences keys */
+    public static final String CHOICES = "pref_number_of_choices";
+    public static final String REGIONS = "pref_regions_to_include";
 
     SharedPreferences mSharedPreferences;
     protected static Set<String> regions = null;
     String numberOfChoices;
-
     TextView mainTextView;
+    Button startButton;
 
 
     @Override
@@ -49,47 +50,54 @@ public class MainActivity extends AppCompatActivity {
         mainTextView = findViewById(R.id.textView2);
 
 
-        currentApiVersion = android.os.Build.VERSION.SDK_INT;
+        /* Hides the NavigationBar */
+        hideNavigationBar(MainActivity.this);
+
+        /* Sets up transparent ActionBar*/
+        transparentActionBar();
+
+        /* Gets SharedPreferences */
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        regions = mSharedPreferences.getStringSet(REGIONS, null);
+        numberOfChoices = mSharedPreferences.getString(CHOICES, null);
+
+        /* Registers listener for Shared Preferences */
+        mSharedPreferences.registerOnSharedPreferenceChangeListener(preferenceChangeListener);
+
+        /* Sets the texts for <mainTextView> */
+        mainTextView.setText(getString(R.string.settings_info, numberOfChoices, getText1(), convertToString(), getText2()));
+
+        /* Registers a listener for <startButton> */
+        setButtonListener(startButton, MainActivity.this);
+
+    }
+
+    /* Sets a listener for a button */
+    private void setButtonListener(Button button, Activity activity) {
+        button.setOnClickListener(v -> {
+            MainActivity.regions = PreferenceManager.getDefaultSharedPreferences(getApplication()).getStringSet(MainActivity.REGIONS, null);
+            if (MainActivity.regions != null && MainActivity.regions.size()>0) {
+                Intent settingsActivityIntent = new Intent(activity, QuizActivity.class);
+                startActivity(settingsActivityIntent);
+            } else {
+                Toast.makeText(activity, R.string.warning_one_region , Toast.LENGTH_SHORT).show();
+            }
+
+        });
+    }
+
+    protected static void hideNavigationBar(Activity activity) {
+        currentApiVersion = Build.VERSION.SDK_INT;
         final int flags = View.SYSTEM_UI_FLAG_LAYOUT_STABLE |
                 View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION |
                 View.SYSTEM_UI_FLAG_HIDE_NAVIGATION |
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         if (currentApiVersion >= Build.VERSION_CODES.KITKAT) {
-            getWindow().getDecorView().setSystemUiVisibility(flags);
+            activity.getWindow().getDecorView().setSystemUiVisibility(flags);
         }
-
-        transparentActionBar();
-
-
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-        regions = mSharedPreferences.getStringSet("pref_regionsToInclude", null);
-        numberOfChoices = mSharedPreferences.getString("pref_numberOfChoices", null);
-
-
-        mSharedPreferences.registerOnSharedPreferenceChangeListener(preferenceChangeListener);
-
-
-
-        mainTextView.setText(getString(R.string.settings_info, numberOfChoices, getText1(), convertToString(), getText2()));
-
-
-        startButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (regions != null && regions.size() > 0) {
-                    Intent settingsActivityIntent = new Intent(MainActivity.this, QuizActivity.class);
-                    startActivity(settingsActivityIntent);
-                } else {
-                    Toast.makeText(MainActivity.this, "Please choose at least one region", Toast.LENGTH_SHORT).show();
-                }
-
-
-            }
-        });
-
     }
 
+    /* Gets 2nd part for the String for <mainTextView> */
     private String getText2() {
 
         int orientation = getResources().getConfiguration().orientation;
@@ -97,22 +105,23 @@ public class MainActivity extends AppCompatActivity {
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
             return "below.";
         } else {
-            return "here " +  "\u2794";
+            return "here " + "\u2794";
         }
     }
 
-    @NonNull
+    /* Gets 4th part for the String for <mainTextView> */
     private String getText1() {
-        if (regions.size() > 1 && regions!= null){
+        if (regions.size() > 1) {
             return "s are";
         } else {
             return " is";
         }
     }
 
+    /* Makes ActionBar transparent */
     protected void transparentActionBar() {
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
@@ -127,10 +136,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()) {
-            case R.id.close_app:
-                closeApp();
-                return true;
+        if (item.getItemId() == R.id.close_app) {
+            closeApp();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -142,45 +150,46 @@ public class MainActivity extends AppCompatActivity {
         startActivity(homeIntent);
     }
 
+
+    /* Converts Set<String> regions into Array and then into String/StringBuilder  */
     public String convertToString() {
-        String[] mRegions =  regions.toArray(new String[regions.size()]);
-        if (mRegions.length == 1){
+
+        String[] mRegions = regions.toArray(new String[regions.size()]);
+        if (mRegions.length == 1) {
             return mRegions[0].replace("_", " ");
-        } else if (mRegions == null || mRegions.length == 0){
+        } else if (mRegions == null || mRegions.length == 0) {
             return "0";
         } else {
-            String myRegions = mRegions[0].replace("_", " ");
-            for (int i = 1; i < mRegions.length; i++){
-                myRegions += ", " + mRegions[i].replace("_", " ");
+            StringBuilder myRegions = new StringBuilder(mRegions[0].replace("_", " "));
+            for (int i = 1; i < mRegions.length; i++) {
+                myRegions.append(", ").append(mRegions[i].replace("_", " "));
             }
 
-            return myRegions;
+            return myRegions.toString();
         }
     }
 
-    private SharedPreferences.OnSharedPreferenceChangeListener preferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-
+    /* Sets change listener for SharedPreferences */
+    private final SharedPreferences.OnSharedPreferenceChangeListener preferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
 
 
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-            if (key.equals("pref_regionsToInclude")) {
+            if (key.equals(REGIONS)) {
 
-                /* Pobranie listy wybranych obszarow... */
-                regions = sharedPreferences.getStringSet("pref_regionsToInclude", null);
-
-
-            }
-
-            if (key.equals("pref_numberOfChoices")) {
-
-                /* Pobranie listy wybranych obszarow... */
-                numberOfChoices = sharedPreferences.getString("pref_numberOfChoices", null);
-
+                /* Gets a list of selected regions */
+                regions = sharedPreferences.getStringSet(REGIONS, null);
 
             }
 
+            if (key.equals(CHOICES)) {
 
+                /* Gets a list of selected number of choices */
+                numberOfChoices = sharedPreferences.getString(CHOICES, null);
+
+            }
+
+            /* Sets text for the <mainTextView> */
             mainTextView.setText(getString(R.string.settings_info, numberOfChoices, getText1(), convertToString(), getText2()));
         }
     };
