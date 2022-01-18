@@ -15,7 +15,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.preference.PreferenceManager;
 
 import java.util.Set;
@@ -26,11 +28,12 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     Button startButton;
     protected static int currentApiVersion = android.os.Build.VERSION.SDK_INT;
-    TextView currentRegion;
-    TextView currentNumberOfChoices;
+
     SharedPreferences mSharedPreferences;
     protected static Set<String> regions;
     String numberOfChoices;
+
+    TextView mainTextView;
 
 
     @Override
@@ -41,8 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         startButton = findViewById(R.id.start_button);
-        currentRegion = findViewById(R.id.currentRegion);
-        currentNumberOfChoices = findViewById(R.id.currentNumberOfChoices);
+        mainTextView = findViewById(R.id.textView2);
 
 
         currentApiVersion = android.os.Build.VERSION.SDK_INT;
@@ -60,14 +62,21 @@ public class MainActivity extends AppCompatActivity {
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         regions = mSharedPreferences.getStringSet("pref_regionsToInclude", null);
-        if (regions != null && regions.size() > 0) {
-            currentRegion.setText(regions.toString());
-        }
-
         numberOfChoices = mSharedPreferences.getString("pref_numberOfChoices", null);
-        currentNumberOfChoices.setText(numberOfChoices);
+
 
         mSharedPreferences.registerOnSharedPreferenceChangeListener(preferenceChangeListener);
+
+
+
+        String isAre = null;
+        if (regions.size() <= 1 || regions==null) {
+            isAre = " is";
+        } else if (regions.size() > 1) {
+            isAre = "s are";
+        }
+        mainTextView.setText(getString(R.string.settings_info, numberOfChoices, isAre, convertToString()));
+
 
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,14 +126,33 @@ public class MainActivity extends AppCompatActivity {
         startActivity(homeIntent);
     }
 
+    public String convertToString() {
+        String[] mRegions =  regions.toArray(new String[regions.size()]);
+        if (mRegions.length == 1){
+            return mRegions[0].replace("_", " ");
+        } else if (mRegions == null || mRegions.length == 0){
+            return "0";
+        } else {
+            String myRegions = mRegions[0];
+            for (int i = 1; i < mRegions.length; i++){
+                myRegions += ", " + mRegions[i].replace("_", " ");
+            }
+
+            return myRegions;
+        }
+    }
+
     private SharedPreferences.OnSharedPreferenceChangeListener preferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+
+
+
         @Override
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             if (key.equals("pref_regionsToInclude")) {
 
                 /* Pobranie listy wybranych obszarow... */
                 regions = sharedPreferences.getStringSet("pref_regionsToInclude", null);
-                currentRegion.setText(regions.toString());
+
 
             }
 
@@ -132,9 +160,17 @@ public class MainActivity extends AppCompatActivity {
 
                 /* Pobranie listy wybranych obszarow... */
                 numberOfChoices = sharedPreferences.getString("pref_numberOfChoices", null);
-                currentNumberOfChoices.setText(numberOfChoices);
+
 
             }
+
+            String isAre = null;
+            if (regions.size() <= 1 || regions==null) {
+                isAre = " is";
+            } else if (regions.size() > 1) {
+                isAre = "s are";
+            }
+            mainTextView.setText(getString(R.string.settings_info, numberOfChoices, isAre, convertToString()));
         }
     };
 

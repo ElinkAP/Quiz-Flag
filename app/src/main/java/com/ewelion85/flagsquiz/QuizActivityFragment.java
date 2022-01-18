@@ -365,9 +365,11 @@ public class QuizActivityFragment extends Fragment {
                 ++correctAnswers;
 
                 /* Wyswietlenie informacji zwrotnej dla uzytkownika o udzieleniu poprawnej odpowiedzi */
-                answerTextView.setText("Bravo, this is a flag of " + answer + "!' " + "\uD83D\uDC4F");
-                player.start();
-                answerTextView.setTextColor(getResources().getColor(R.color.correct_answer, getContext().getTheme()));
+                {
+                    answerTextView.setText("Bravo, this is a flag of " + answer + "!' " + "\uD83D\uDC4F");
+                    player.start();
+                    answerTextView.setTextColor(getResources().getColor(R.color.correct_answer, getContext().getTheme()));
+                }
 
                 /* Dezaktywacja wszystkich przyciskow odpowiedzi */
                 disableButtons();
@@ -375,7 +377,7 @@ public class QuizActivityFragment extends Fragment {
                 /* Jezeli uzytkownik udzielil odpowiedzi na wszystkie pytania */
                 if (correctAnswers == FLAGS_IN_QUIZ) {
                     /* Utworzenie obiektu AlertDialog ze spersonalizowanym tekstem oraz przyciskiem */
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(), R.style.YourAlertDialogTheme);
                     builder.setTitle("Quiz results");
                     builder.setMessage(getString(R.string.results, totalGuesses, (1000 / (double) totalGuesses)));
                     builder.setPositiveButton(R.string.reset_quiz, new DialogInterface.OnClickListener() {

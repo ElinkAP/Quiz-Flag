@@ -5,12 +5,7 @@
     <item>
         <shape>
             <corners android:radius="15dp"/>
-            <gradient
-                android:gradientRadius="400dp"
-                android:endColor="#00B8D4"
-                android:startColor="#27BECA"
-                android:angle="20"
-                android:type="linear" />
+            <solid android:color="@color/dark_blue" />
         </shape>
     </item>
 </selector>

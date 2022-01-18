@@ -25,7 +25,7 @@
         android:orientation="horizontal"
         android:textAlignment="textStart" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/start_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
