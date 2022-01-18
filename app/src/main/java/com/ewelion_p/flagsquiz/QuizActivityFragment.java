@@ -1,4 +1,4 @@
-package com.ewelion85.flagsquiz;
+package com.ewelion_p.flagsquiz;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

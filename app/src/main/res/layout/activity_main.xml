@@ -39,7 +39,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/settings_fragment"
-        android:name="com.ewelion85.flagsquiz.SettingActivityFragment"
+        android:name="com.ewelion_p.flagsquiz.SettingActivityFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="0dp"

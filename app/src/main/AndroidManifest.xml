@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.ewelion85.flagsquiz">
+    package="com.ewelion_p.flagsquiz">
 
     <application
         android:allowBackup="true"
