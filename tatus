@@ -1,0 +1,85 @@
+[33mcommit fb8f7dc77eff3ab8617e226c0c0bdf6314f563b7[m[33m ([m[1;36mHEAD[m[33m)[m
+Author: Ewelion_P <ewelinaprzepiorka@hotmail.com>
+Date:   Tue Jan 18 02:19:01 2022 +0000
+
+    Add activity_main.xml (landscape)
+
+[33mcommit f18b80ee589fa8da77d8945af8a803695052afd0[m[33m ([m[1;32mmaster[m[33m)[m
+Author: Ewelion_P <ewelinaprzepiorka@hotmail.com>
+Date:   Tue Jan 18 00:03:05 2022 +0000
+
+    Update wording
+
+[33mcommit 5008b199024a3d64c6869e73af88ee74cd7cdf03[m
+Author: Ewelion_P <ewelinaprzepiorka@hotmail.com>
+Date:   Mon Jan 17 18:27:31 2022 +0000
+
+    Update colors
+
+[33mcommit d123768177ccfbb26e671ddd125ce00816612d26[m
+Author: Ewelion_P <ewelinaprzepiorka@hotmail.com>
+Date:   Sun Jan 16 23:17:34 2022 +0000
+
+    Access to the color theme available
+
+[33mcommit b5aecdd4068e1c287195b29d232956c816fdc7a0[m
+Author: Ewelion_P <ewelinaprzepiorka@hotmail.com>
+Date:   Sun Jan 16 20:37:21 2022 +0000
+
+    Fix the no region selected error
+
+[33mcommit fb0635b01e0d83fb614b14a1bced762e11daeefc[m
+Author: Ewelion_P <ewelinaprzepiorka@hotmail.com>
+Date:   Tue Jan 11 23:39:08 2022 +0000
+
+    Update list of countries
+
+[33mcommit 5233228552c12bc272d28f8540a2631a48998081[m
+Author: Ewelion_P <ewelinaprzepiorka@hotmail.com>
+Date:   Tue Jan 11 23:07:52 2022 +0000
+
+    Add AlertDialogs
+
+[33mcommit 5a2fb524544bf938ae8856f702937ffdda9878f3[m
+Author: Ewelion_P <ewelinaprzepiorka@hotmail.com>
+Date:   Tue Jan 11 21:28:52 2022 +0000
+
+    Add menu
+    Remove the bottom bar
+
+[33mcommit 09ccd37880ca6dca206b42da389d8e39d1d1a7f6[m
+Author: Ewelion_P <ewelinaprzepiorka@hotmail.com>
+Date:   Mon Jan 10 23:18:48 2022 +0000
+
+    Set up colors
+
+[33mcommit a92064eec455cafb3740b4248d738855464499f0[m
+Author: Ewelion_P <ewelinaprzepiorka@hotmail.com>
+Date:   Sat Jan 8 22:53:58 2022 +0000
+
+    Fix the bug
+    -Changing orientation does not restart the quiz
+
+[33mcommit 9ec85a7952aa71f2cb78b9a13cf3659212ac19de[m
+Author: Ewelion_P <ewelinaprzepiorka@hotmail.com>
+Date:   Sat Jan 8 22:15:26 2022 +0000
+
+    Fix SettingActivity
+
+[33mcommit da06afcf3fd2941bb79b4cb4b02f9b38f5477557[m
+Author: Ewelion_P <ewelinaprzepiorka@hotmail.com>
+Date:   Wed Jan 5 23:12:31 2022 +0000
+
+    Main logic working
+
+[33mcommit 94552c2b873b926d196ea5bef55b99c4598cca0c[m
+Author: Ewelion_P <ewelinaprzepiorka@hotmail.com>
+Date:   Tue Jan 4 19:16:57 2022 +0000
+
+    Add Landscape
+
+[33mcommit 8ae59c4fc26f7fb1e2eb58388e358e5b83caa09b[m
+Author: Ewelion_P <ewelinaprzepiorka@hotmail.com>
+Date:   Tue Jan 4 18:25:18 2022 +0000
+
+    First commit
