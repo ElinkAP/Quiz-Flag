@@ -363,11 +363,9 @@ public class QuizActivityFragment extends Fragment {
                 ++correctAnswers;
 
                 /* Lets user know that the answer was correct */
-                {
-                    answerTextView.setText(getString(R.string.correct_answer_reply, answer));
-                    player.start();
-                    answerTextView.setTextColor(getResources().getColor(R.color.correct_answer, getContext().getTheme()));
-                }
+                answerTextView.setText(getString(R.string.correct_answer_reply, answer));
+                player.start();
+                answerTextView.setTextColor(getResources().getColor(R.color.correct_answer, getContext().getTheme()));
 
                 /* Disable all buttons */
                 disableButtons();
@@ -394,7 +392,7 @@ public class QuizActivityFragment extends Fragment {
                         public void run() {
                             animate(true);
                         }
-                    }, 2000);
+                    }, 3000);
 
                 }
 
