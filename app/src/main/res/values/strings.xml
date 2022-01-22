@@ -2,7 +2,7 @@
     <string name="app_name"><i>Flags Quiz</i></string>
     <string name="action_settings">Change settings</string>
 
-    <string name="number_of_choices">Number of answers to choose from</string>
+    <string name="number_of_choices"><font size="18" color="#FFD700"><i>Number of answers to choose from:</i></font></string>
     <string name="guess_country">What country is it?</string>
     <string name="image_description">Picture of the current flag</string>
     <string name="incorrect_answer">Wrong answer!</string>
@@ -11,10 +11,10 @@
     <string name="reset_quiz">Reset quiz</string>
     <string name="restarting_quiz">The quiz will restart with the selected choices</string>
     <string name="results">%1$d answers, %2$.02f%% correct answers</string>
-    <string name="world_regions">Regions</string>
-    <string name="world_regions_descriptions">Select regions</string>
+    <string name="world_regions"><font size="18" color="#FFD700"><i>Regions</i></font></string>
+    <string name="world_regions_descriptions">Change regions</string>
     <string name="title_activity_settings">SettingsActivity</string>
-    <string name="settings_info">Choose the right flag out of %1$s. The current selected region%2$s: %3$s. You can amend your options %4$s</string>
+    <string name="settings_info"><b>Choose the right flag out of</b> %1$s. The current selected region%2$s: %3$s. You can amend your options %4$s</string>
     <string name="warning_one_region">Please choose at least one region</string>
     <string name="restart_quiz">Restart Quiz</string>
     <string name="close_app">Close App</string>
@@ -27,4 +27,5 @@
     <string name="correct_answer_reply">Bravo, this is a flag of %1$s! \uD83D\uDC4F</string>
     <string name="welcome_text">Check your knowledge of worldwide flags!</string>
     <string name="start_quiz">Start Quiz</string>
+    <string name="default_value_number">4</string>
 </resources>

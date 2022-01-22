@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -105,9 +107,9 @@ public class QuizActivityFragment extends Fragment {
         random = new SecureRandom();
         handler = new Handler();
 
-        /* Initialization of the animation */
-        shakeAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.incorrect_shake);
-        shakeAnimation.setRepeatCount(3);
+//        /* Initialization of the animation */
+//        shakeAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.incorrect_shake);
+//        shakeAnimation.setRepeatCount(3);
 
         /* Initialization of 'user interface' */
         quizLinearLayout = view.findViewById(R.id.quizLinearLayout);
@@ -138,6 +140,21 @@ public class QuizActivityFragment extends Fragment {
 
         return view;
 
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        /* Initialization of the animation */
+        shakeAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.incorrect_shake);
+        shakeAnimation.setRepeatCount(3);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
     }
 
@@ -313,6 +330,9 @@ public class QuizActivityFragment extends Fragment {
         /* Calculate a radius of the animation */
         int radius = Math.max(quizLinearLayout.getWidth(), quizLinearLayout.getHeight());
 
+
+
+
         /* Animation object */
         Animator animator;
 
@@ -393,9 +413,7 @@ public class QuizActivityFragment extends Fragment {
                             animate(true);
                         }
                     }, 3000);
-
                 }
-
             }
 
             /* If the answer is incorrect... */

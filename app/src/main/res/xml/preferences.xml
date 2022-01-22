@@ -4,7 +4,7 @@
 
 
     <ListPreference
-        android:defaultValue="4"
+        android:defaultValue="@string/default_value_number"
         android:entries="@array/guesses_list"
         android:entryValues="@array/guesses_list"
         android:key="pref_number_of_choices"

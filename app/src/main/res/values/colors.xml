@@ -12,7 +12,7 @@
     <color name="lightish_blue">#FF4AA0A8</color>
     <color name="menu_light">#FF4A86A8</color>
     <color name="menu_dark">#FF1A82A0</color>
-
+    <color name="gold">#FFFFD700</color>
 
     <color name="correct_answer">#00CC00</color>
     <color name="incorrect_answer">#FF0000</color>
