@@ -9,6 +9,9 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -64,23 +67,49 @@ public class MainActivity extends AppCompatActivity {
         /* Registers listener for Shared Preferences */
         mSharedPreferences.registerOnSharedPreferenceChangeListener(preferenceChangeListener);
 
+        mainTextView.setTextSize(20);
+
         /* Sets the texts for <mainTextView> */
-        mainTextView.setText(getString(R.string.settings_info, numberOfChoices, getText1(), convertToString(), getText2()));
+        setSpannableString();
+
 
         /* Registers a listener for <startButton> */
         setButtonListener(startButton, MainActivity.this);
 
     }
 
+    /* Sets up the text for mainTextView */
+    private void setSpannableString() {
+
+        /* Gets the String value */
+        String mainText = getString(R.string.settings_info, numberOfChoices, getText1(), convertToString(), getText2());
+
+        /* Gets a SpannableString */
+        SpannableString span = new SpannableString(mainText);
+
+        /* Sets the number of choices value in gold and bigger */
+        span.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.gold, getTheme())), 29, 30, 0);
+        span.setSpan(new RelativeSizeSpan(1.3f), 29, 30, 0);
+
+        /* Sets the regions in gold and bigger */
+        int regionsListStart = mainText.indexOf(":")+1;
+        int regionsListEnd = mainText.indexOf(" You")-1;
+        span.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.gold, getTheme())), regionsListStart, regionsListEnd, 0);
+        span.setSpan(new RelativeSizeSpan(1.3f), regionsListStart, regionsListEnd, 0);
+
+
+        mainTextView.setText(span);
+    }
+
     /* Sets a listener for a button */
     private void setButtonListener(Button button, Activity activity) {
         button.setOnClickListener(v -> {
             MainActivity.regions = PreferenceManager.getDefaultSharedPreferences(getApplication()).getStringSet(MainActivity.REGIONS, null);
-            if (MainActivity.regions != null && MainActivity.regions.size()>0) {
+            if (MainActivity.regions != null && MainActivity.regions.size() > 0) {
                 Intent settingsActivityIntent = new Intent(activity, QuizActivity.class);
                 startActivity(settingsActivityIntent);
             } else {
-                Toast.makeText(activity, R.string.warning_one_region , Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, R.string.warning_one_region, Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -180,6 +209,7 @@ public class MainActivity extends AppCompatActivity {
                 /* Gets a list of selected regions */
                 regions = sharedPreferences.getStringSet(REGIONS, null);
 
+
             }
 
             if (key.equals(CHOICES)) {
@@ -187,10 +217,12 @@ public class MainActivity extends AppCompatActivity {
                 /* Gets a list of selected number of choices */
                 numberOfChoices = sharedPreferences.getString(CHOICES, null);
 
+
             }
 
             /* Sets text for the <mainTextView> */
-            mainTextView.setText(getString(R.string.settings_info, numberOfChoices, getText1(), convertToString(), getText2()));
+//            mainTextView.setText(getString(R.string.settings_info, numberOfChoices, getText1(), convertToString(), getText2()));
+            setSpannableString();
         }
     };
 

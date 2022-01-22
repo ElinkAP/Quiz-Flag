@@ -141,6 +141,12 @@ public class QuizActivityFragment extends Fragment {
 
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+    }
+
     public void updateGuessRows(SharedPreferences sharedPreferences) {
 
         /* Gets information how many buttons to show */
@@ -393,9 +399,7 @@ public class QuizActivityFragment extends Fragment {
                             animate(true);
                         }
                     }, 3000);
-
                 }
-
             }
 
             /* If the answer is incorrect... */

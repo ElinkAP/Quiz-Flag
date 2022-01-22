@@ -23,7 +23,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:textAlignment="textStart" />
+        android:textAlignment="textStart"
+        android:textColor="#FFFFFF"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/start_button"
