@@ -30,16 +30,41 @@
             android:text="@string/changing_settings_warning"
             android:textSize="20sp" />
 
-        <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/settingsFragment"
-            android:name="com.ewelion_p.flagsquiz.SettingActivityFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:layout_marginBottom="32dp"
-            android:orientation="horizontal"
-            android:textAlignment="textStart"
-            android:textColor="#FFFFFF" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Number of answers to choose from:" />
+
+
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="6"/>
+
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8"/>
+
+
+                </RadioGroup>
+
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/start_button"

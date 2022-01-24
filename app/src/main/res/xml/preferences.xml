@@ -9,6 +9,7 @@
         android:entryValues="@array/guesses_list"
         android:key="pref_number_of_choices"
         android:persistent="true"
+
         android:title="@string/number_of_choices"
         app:useSimpleSummaryProvider="true" />
 
