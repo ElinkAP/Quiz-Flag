@@ -35,32 +35,50 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:layout_marginTop="32dp"
+                android:textColor="@color/gold"
                 android:text="Number of answers to choose from:" />
 
 
             <RadioGroup
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginStart="64sp"
+                android:id="@+id/number_group">
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2"/>
+                    android:id="@+id/rb_2"
+                    android:text="2"
+                    android:textColor="@color/white"
+                    android:buttonTint="@color/dark_blue"/>
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4"/>
+                    android:id="@+id/rb_4"
+                    android:text="4"
+                    android:textColor="@color/white"
+                    android:buttonTint="@color/dark_blue"/>
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="6"/>
+                    android:id="@+id/rb_6"
+                    android:text="6"
+                    android:textColor="@color/white"
+                    android:buttonTint="@color/dark_blue"/>
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="8"/>
+                    android:id="@+id/rb_8"
+                    android:text="8"
+                    android:textColor="@color/white"
+                    android:buttonTint="@color/dark_blue"/>
 
 
                 </RadioGroup>
