@@ -4,10 +4,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/gradient_background"
     android:orientation="vertical"
     tools:context=".SettingsActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
     <LinearLayout
         android:id="@+id/quizLinearLayout"
@@ -35,9 +43,10 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="start"
                 android:textSize="20sp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="32sp"
+                android:layout_marginStart="64sp"
                 android:textColor="@color/gold"
                 android:text="Number of answers to choose from:" />
 
@@ -53,6 +62,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/rb_2"
                     android:text="2"
+                    android:textSize="18sp"
                     android:textColor="@color/white"
                     android:buttonTint="@color/dark_blue"/>
 
@@ -61,6 +71,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/rb_4"
                     android:text="4"
+                    android:textSize="18sp"
                     android:textColor="@color/white"
                     android:buttonTint="@color/dark_blue"/>
 
@@ -69,6 +80,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/rb_6"
                     android:text="6"
+                    android:textSize="18sp"
                     android:textColor="@color/white"
                     android:buttonTint="@color/dark_blue"/>
 
@@ -77,11 +89,87 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/rb_8"
                     android:text="8"
+                    android:textSize="18sp"
                     android:textColor="@color/white"
                     android:buttonTint="@color/dark_blue"/>
 
 
                 </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:textSize="20sp"
+            android:layout_marginTop="32sp"
+            android:layout_marginStart="64sp"
+            android:textColor="@color/gold"
+            android:text="Regions:" />
+
+
+        <RadioGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/regions_group"
+            android:layout_marginStart="64sp">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_africa"
+                android:text="Africa"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:buttonTint="@color/dark_blue"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_asia"
+                android:text="Asia"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:buttonTint="@color/dark_blue"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_europe"
+                android:text="Europe"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:buttonTint="@color/dark_blue"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_n_america"
+                android:text="North America"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:buttonTint="@color/dark_blue"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_oceania"
+                android:text="Oceania"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:buttonTint="@color/dark_blue"/>
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_s_america"
+                android:text="South America"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:buttonTint="@color/dark_blue"/>
+
+
+        </RadioGroup>
 
 
         <androidx.appcompat.widget.AppCompatButton
@@ -94,5 +182,7 @@
             android:text="@string/start_quiz" />
 
     </LinearLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

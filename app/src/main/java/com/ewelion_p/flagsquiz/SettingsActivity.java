@@ -6,9 +6,10 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -16,12 +17,23 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
+import java.util.Set;
+
 
 public class SettingsActivity extends AppCompatActivity {
 
     Button startButton;
-    RadioGroup radioGroup;
+    RadioGroup radioGroupChoices;
+    RadioGroup radioGroupRegions;
     SharedPreferences mSharedPreferences;
+    String numberOfChoices;
+    protected static Set<String> regions = null;
+    CheckBox africa;
+    CheckBox asia;
+    CheckBox europe;
+    CheckBox southAmerica;
+    CheckBox oceania;
+    CheckBox northAmerica;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,42 +53,134 @@ public class SettingsActivity extends AppCompatActivity {
         /* Gets SharedPreferences */
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-//        /* Registers listener for Shared Preferences */
-//        mSharedPreferences.registerOnSharedPreferenceChangeListener(preferenceChangeListener);
 
-        radioGroup = findViewById(R.id.number_group);
 
-        setRadioGroupListener();
+        radioGroupChoices = findViewById(R.id.number_group);
+        radioGroupRegions = findViewById(R.id.regions_group);
+
+        getRegions();
+        getChoices();
+
+        setChoicesRadioGroupListener();
+
+        CheckBox africa = findViewById(R.id.btn_africa);
+        CheckBox asia = findViewById(R.id.btn_asia);
+        CheckBox europe = findViewById(R.id.btn_europe);
+        CheckBox southAmerica = findViewById(R.id.btn_s_america);
+        CheckBox oceania = findViewById(R.id.btn_oceania);
+        CheckBox northAmerica = findViewById(R.id.btn_n_america);
+
+        checkBoxListener(africa, "Africa");
+        checkBoxListener(asia, "Asia");
+        checkBoxListener(europe, "Europe");
+        checkBoxListener(northAmerica, "North_America");
+        checkBoxListener(oceania, "Oceania");
+        checkBoxListener(southAmerica, "South_America");
+
 
     }
 
-    private void setRadioGroupListener() {
+    private void getRegions() {
+
+        regions = mSharedPreferences.getStringSet(MainActivity.REGIONS, null);
+        for (String region : regions) {
+            switch (region) {
+                case "Asia":
+                    ((CheckBox) (findViewById(R.id.btn_asia))).setChecked(true);
+                    setTextColorCheckBox(R.id.btn_asia);
+                    break;
+
+                case "Africa":
+                    ((CheckBox) (findViewById(R.id.btn_africa))).setChecked(true);
+                    setTextColorCheckBox(R.id.btn_africa);
+                    break;
+
+                case "Europe":
+                    ((CheckBox) (findViewById(R.id.btn_europe))).setChecked(true);
+                    setTextColorCheckBox(R.id.btn_europe);
+                    break;
+
+                case "North_America":
+                    ((CheckBox) (findViewById(R.id.btn_n_america))).setChecked(true);
+                    setTextColorCheckBox(R.id.btn_n_america);
+                    break;
+
+                case "Oceania":
+                    ((CheckBox) (findViewById(R.id.btn_oceania))).setChecked(true);
+                    setTextColorCheckBox(R.id.btn_oceania);
+                    break;
+
+                case "South_America":
+                    ((CheckBox) (findViewById(R.id.btn_s_america))).setChecked(true);
+                    setTextColorCheckBox(R.id.btn_s_america);
+                    break;
+
+
+            }
+        }
+
+    }
+
+    private void getChoices() {
+        numberOfChoices = mSharedPreferences.getString(MainActivity.CHOICES, null);
+
+        switch (numberOfChoices) {
+
+            case "2":
+                ((RadioButton) (findViewById(R.id.rb_2))).setChecked(true);
+                setTextColor(R.id.rb_2);
+                break;
+
+            case "4":
+                ((RadioButton) (findViewById(R.id.rb_4))).setChecked(true);
+                setTextColor(R.id.rb_4);
+                break;
+
+            case "6":
+                ((RadioButton) (findViewById(R.id.rb_6))).setChecked(true);
+                setTextColor(R.id.rb_6);
+                break;
+
+            case "8":
+                ((RadioButton) (findViewById(R.id.rb_8))).setChecked(true);
+                setTextColor(R.id.rb_8);
+                break;
+        }
+    }
+
+
+    private void setChoicesRadioGroupListener() {
+
 
         SharedPreferences.Editor editor = mSharedPreferences.edit();
 
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        radioGroupChoices.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                switch(checkedId){
+                switch (checkedId) {
 
                     case R.id.rb_2:
                         editor.putString(MainActivity.CHOICES, "2");
                         editor.apply();
+                        setTextColor(R.id.rb_2);
                         break;
 
                     case R.id.rb_4:
                         editor.putString(MainActivity.CHOICES, "4");
                         editor.apply();
+                        setTextColor(R.id.rb_4);
                         break;
 
                     case R.id.rb_6:
                         editor.putString(MainActivity.CHOICES, "6");
                         editor.apply();
+                        setTextColor(R.id.rb_6);
                         break;
 
                     case R.id.rb_8:
                         editor.putString(MainActivity.CHOICES, "8");
                         editor.apply();
+                        setTextColor(R.id.rb_8);
                         break;
 
                 }
@@ -84,80 +188,55 @@ public class SettingsActivity extends AppCompatActivity {
         });
     }
 
-//    /* Sets change listener for SharedPreferences */
-//    private final SharedPreferences.OnSharedPreferenceChangeListener preferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+    private void setTextColor(int id){
+
+        for (int i = 0; i < 4; i++) {
+            ((RadioButton)radioGroupChoices.getChildAt(i)).setTextColor(getResources().getColor(R.color.white, getTheme()));
+        }
+
+        ((RadioButton) findViewById(id)).setTextColor(getResources().getColor(R.color.gold, getTheme()));
+    }
+
+    private void setTextColorCheckBox(int id){
 //
-//
-//        @Override
-//        public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
-////            if (key.equals(MainActivity.REGIONS)) {
-////
-////                /* Gets a list of selected regions */
-////                regions = sharedPreferences.getStringSet(MainActivity.REGIONS, null);
-////
-////
-////            }
-//
-//            if (key.equals(MainActivity.CHOICES)) {
-//
-//                /* Gets a list of selected number of choices */
-//                numberOfChoices = sharedPreferences.getString(CHOICES, null);
-//
-//
-//            }
+//        for (int i = 0; i < 6; i++) {
+//            ((CheckBox)radioGroupRegions.getChildAt(i)).setTextColor(getResources().getColor(R.color.white, getTheme()));
 //        }
-//    };
 
-//    public void addListenerOnButton() {
-//
-//        radioGroup = (RadioGroup) findViewById(R.id.radio);
-//        radioButton2 = (RadioButton) findViewById(R.id.rb_2);
-//
-//        radioButton2.setOnClickListener(new View.OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//
-//                // get selected radio button from radioGroup
-//                int selectedId = radioGroup.getCheckedRadioButtonId();
-//
-//                // find the radiobutton by returned id
-//                radioButton = (RadioButton) findViewById(selectedId);
-//
-//                Toast.makeText(SettingsActivity.this, "selected button is: " +
-//                        radioButton.getText(), Toast.LENGTH_SHORT).show();
-//
-//            }
-//
-//        });
-//
-//    }
-
-//    private void saveRadioChoice(){
-//        SharedPreferences mSharedPref = getSharedPreferences(MainActivity.CHOICES, MODE_PRIVATE);
-//
-//        SharedPreferences.Editor editor = mSharedPref.edit();
-//
-//// Initialize Radiogroup while saving choices
-//        RadioGroup localRadioGroup = (RadioGroup) findViewById(R.id.number_group);
-//        editor.putInt(String.valueOf(2), localRadioGroup.indexOfChild(findViewById(localRadioGroup.getCheckedRadioButtonId())));
-//        editor.apply();
-//    }
-//
-//    private void retrieveChoices(){
-//
-//        SharedPreferences sharedPref = getSharedPreferences(MainActivity.CHOICES,MODE_PRIVATE);
-//        int i = sharedPref.getInt(String.valueOf(2),-1);
-//        if( i >= 0){
-//            ((RadioButton) ((RadioGroup)findViewById(R.id.rb_2))).getChildAt(i)).setChecked(true);
-//        }
-//
-//
-//    }
+        ((CheckBox) findViewById(id)).setTextColor(getResources().getColor(R.color.gold, getTheme()));
+    }
 
 
 
-    /* Sets a listener for a button */
+
+    private void checkBoxListener(CheckBox regionBox, String region) {
+
+        regions = mSharedPreferences.getStringSet(MainActivity.REGIONS, null);
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+
+        regionBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (buttonView.isShown()){
+                    if (buttonView.isChecked()){
+                        regions.add(region);
+                        setTextColorCheckBox(regionBox.getId());
+                    } else {
+                        regions.remove(region);
+                        (regionBox).setTextColor(getResources().getColor(R.color.white, getTheme()));
+                    }
+                }
+
+            }
+        });
+
+        editor.putStringSet(MainActivity.REGIONS, regions);
+        editor.apply();
+    }
+
+
+
+    /* Sets a listener for a start button */
     private void setButtonListener(Button button, Activity activity) {
 
         button.setOnClickListener(v -> {
