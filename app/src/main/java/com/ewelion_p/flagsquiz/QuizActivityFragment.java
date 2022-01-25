@@ -107,10 +107,6 @@ public class QuizActivityFragment extends Fragment {
         random = new SecureRandom();
         handler = new Handler();
 
-//        /* Initialization of the animation */
-//        shakeAnimation = AnimationUtils.loadAnimation(getActivity(), R.anim.incorrect_shake);
-//        shakeAnimation.setRepeatCount(3);
-
         /* Initialization of 'user interface' */
         quizLinearLayout = view.findViewById(R.id.quizLinearLayout);
         questionNumberTextView = view.findViewById(R.id.questionNumberTextView);

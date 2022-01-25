@@ -1,42 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     android:background="@drawable/gradient_background"
-    android:orientation="vertical"
-    tools:context=".SettingsActivity">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <ScrollView
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
 
-    <LinearLayout
-        android:id="@+id/quizLinearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
-        android:layout_marginBottom="48dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:paddingTop="100dp"
+        android:paddingBottom="30dp"
+        tools:context=".SettingsActivity">
 
-        <TextView
-            android:id="@+id/textView2"
+
+        <LinearLayout
+            android:id="@+id/quizLinearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:gravity="center"
-            android:text="@string/changing_settings_warning"
-            android:textSize="20sp" />
+            android:layout_height="match_parent"
+
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="@string/changing_settings_warning"
+                android:textSize="20sp" />
 
 
             <TextView
@@ -44,145 +43,146 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"
-                android:textSize="20sp"
-                android:layout_marginTop="32sp"
                 android:layout_marginStart="64sp"
+                android:layout_marginTop="32sp"
+                android:text="@string/number_of_choices"
                 android:textColor="@color/gold"
-                android:text="Number of answers to choose from:" />
+                android:textSize="20sp" />
 
 
             <RadioGroup
+                android:id="@+id/number_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="64sp"
-                android:id="@+id/number_group">
+                android:layout_marginStart="64sp">
 
                 <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/rb_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/dark_blue"
                     android:text="2"
-                    android:textSize="18sp"
                     android:textColor="@color/white"
-                    android:buttonTint="@color/dark_blue"/>
+                    android:textSize="18sp" />
 
                 <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/rb_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/dark_blue"
                     android:text="4"
-                    android:textSize="18sp"
                     android:textColor="@color/white"
-                    android:buttonTint="@color/dark_blue"/>
+                    android:textSize="18sp" />
 
                 <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/rb_6"
-                    android:text="6"
-                    android:textSize="18sp"
-                    android:textColor="@color/white"
-                    android:buttonTint="@color/dark_blue"/>
-
-                <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/rb_8"
-                    android:text="8"
-                    android:textSize="18sp"
+                    android:buttonTint="@color/dark_blue"
+                    android:text="6"
                     android:textColor="@color/white"
-                    android:buttonTint="@color/dark_blue"/>
+                    android:textSize="18sp" />
+
+                <RadioButton
+                    android:id="@+id/rb_8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/dark_blue"
+                    android:text="8"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
 
 
-                </RadioGroup>
+            </RadioGroup>
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:textSize="20sp"
-            android:layout_marginTop="32sp"
-            android:layout_marginStart="64sp"
-            android:textColor="@color/gold"
-            android:text="Regions:" />
-
-
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/regions_group"
-            android:layout_marginStart="64sp">
-
-            <CheckBox
+            <TextView
+                android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_africa"
-                android:text="Africa"
-                android:textSize="18sp"
-                android:textColor="@color/white"
-                android:buttonTint="@color/dark_blue"/>
+                android:layout_gravity="start"
+                android:layout_marginStart="64sp"
+                android:layout_marginTop="32sp"
+                android:text="@string/select_regions"
+                android:textColor="@color/gold"
+                android:textSize="20sp" />
 
-            <CheckBox
+
+            <RadioGroup
+                android:id="@+id/regions_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_asia"
-                android:text="Asia"
-                android:textSize="18sp"
-                android:textColor="@color/white"
-                android:buttonTint="@color/dark_blue"/>
+                android:layout_marginStart="64sp">
 
-            <CheckBox
+                <CheckBox
+                    android:id="@+id/btn_africa"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/dark_blue"
+                    android:text="@string/africa"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <CheckBox
+                    android:id="@+id/btn_asia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/dark_blue"
+                    android:text="@string/asia"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <CheckBox
+                    android:id="@+id/btn_europe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/dark_blue"
+                    android:text="@string/europe"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <CheckBox
+                    android:id="@+id/btn_n_america"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/dark_blue"
+                    android:text="@string/north_america"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <CheckBox
+                    android:id="@+id/btn_oceania"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/dark_blue"
+                    android:text="@string/oceania"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+                <CheckBox
+                    android:id="@+id/btn_s_america"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:buttonTint="@color/dark_blue"
+                    android:text="@string/south_america"
+                    android:textColor="@color/white"
+                    android:textSize="18sp" />
+
+
+            </RadioGroup>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/start_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_europe"
-                android:text="Europe"
-                android:textSize="18sp"
-                android:textColor="@color/white"
-                android:buttonTint="@color/dark_blue"/>
+                android:layout_gravity="center"
+                android:layout_marginTop="32dp"
+                android:background="@drawable/gradient_button"
+                android:text="@string/start_quiz" />
 
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btn_n_america"
-                android:text="North America"
-                android:textSize="18sp"
-                android:textColor="@color/white"
-                android:buttonTint="@color/dark_blue"/>
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btn_oceania"
-                android:text="Oceania"
-                android:textSize="18sp"
-                android:textColor="@color/white"
-                android:buttonTint="@color/dark_blue"/>
-
-            <CheckBox
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btn_s_america"
-                android:text="South America"
-                android:textSize="18sp"
-                android:textColor="@color/white"
-                android:buttonTint="@color/dark_blue"/>
+        </LinearLayout>
 
 
-        </RadioGroup>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/start_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="32dp"
-            android:background="@drawable/gradient_button"
-            android:text="@string/start_quiz" />
-
-    </LinearLayout>
-
-    </ScrollView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
